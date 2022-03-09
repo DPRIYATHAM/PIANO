@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>keyboard_piano</title>
+    <style>
+        body{
+            background-image: url(https://wallpaper.dog/large/20353060.jpg);
+            background-size: cover;
+
+        }
+        .key{
+            border: 1px solid ;
+            padding: 200px 38px;
+            background-color: black;
+            display: inline-block;
+            font-size: 25px;
+            font-family: Lucida;
+            color: white;
+            border-radius: 10px;
+            border-color: red;
+        }
+        .key{
+            animation: rotate 3s linear infinite;
+        }
+        @keyframes rotate{
+            0% {
+                filter:hue-rotate(0deg);
+            }
+            100%{
+                filter: hue-rotate(360deg);
+            }
+        }
+        table{
+            border: 1px;
+            border-spacing: 0mm;
+            padding:0mm;
+            margin: 10px auto;
+            background-color: black;
+            border-radius: 15px;
+            box-shadow: 0 0 30px red;
+        }
+        table,tr,td{
+            width:60vw;
+            height: 70px;
+            font-size: 30px;
+            text-align: center;
+            font-family: lucida;
+        }
+        table{
+            animation: rotate 3s linear infinite;
+        }
+        @keyframes rotate{
+            0% {
+                filter:hue-rotate(0deg);
+            }
+            100%{
+                filter: hue-rotate(360deg);
+            }
+        }
+        .bottom{
+            position: absolute;
+            bottom: 4%; 
+            right: 40%;
+        }
+    </style>
+</head>
+<body><br><br><br><br>
+    <table>
+        <tr>
+            <td>
+                <div data-key="65" class="key">
+                  <kbd class="bottom">A</kbd>
+                </div>
+            </td>
+            <td>
+                <div data-key="83" class="key">
+                  <kbd class="bottom">S</kbd>
+                </div>
+            </td>
+            <td>
+                <div data-key="68" class="key">
+                  <kbd class="bottom">D</kbd>
+                </div>
+            </td>
+            <td>
+                <div data-key="70" class="key">
+                  <kbd class="bottom">F</kbd>
+                </div>
+            </td>
+            <td>
+                <div data-key="71" class="key">
+                  <kbd class="bottom">G</kbd>
+                </div>
+            </td>
+            <td>
+                <div data-key="72" class="key">
+                 <kbd class="bottom">H</kbd>
+                </div>
+            </td>
+            <td>
+                <div data-key="74" class="key">
+                  <kbd class="bottom">J</kbd>
+                </div>
+            </td>
+            <td>
+                <div data-key="75" class="key">
+                  <kbd class="bottom">K</kbd>
+                </div>
+            </td>
+            <td>
+                <div data-key="76" class="key">
+                  <kbd class="bottom">L</kbd>
+                </div>
+            </td>
+            <td>
+                <div data-key="186" class="key">
+                  <kbd class="bottom">;</kbd>
+                </div>
+            </td>     
+        </tr>
+        <tr>
+            <td colspan ="10" style="font-size: 50px;font-family: lucida;color: white;"><i>darisi_piano</i></td>
+        </tr>
+    </table>
+    <audio data-key="65" src="http://carolinegabriel.com/demo/js-keyboard/sounds/040.wav"></audio>
+    <audio data-key="68" src="http://carolinegabriel.com/demo/js-keyboard/sounds/044.wav"></audio>
+    <audio data-key="69" src="http://carolinegabriel.com/demo/js-keyboard/sounds/043.wav"></audio>
+    <audio data-key="70" src="http://carolinegabriel.com/demo/js-keyboard/sounds/045.wav"></audio>
+    <audio data-key="71" src="http://carolinegabriel.com/demo/js-keyboard/sounds/047.wav"></audio>
+    <audio data-key="72" src="http://carolinegabriel.com/demo/js-keyboard/sounds/049.wav"></audio>
+    <audio data-key="74" src="http://carolinegabriel.com/demo/js-keyboard/sounds/051.wav"></audio>
+    <audio data-key="75" src="http://carolinegabriel.com/demo/js-keyboard/sounds/052.wav"></audio>
+    <audio data-key="76" src="http://carolinegabriel.com/demo/js-keyboard/sounds/054.wav"></audio>
+    <audio data-key="79" src="http://carolinegabriel.com/demo/js-keyboard/sounds/053.wav"></audio>
+    <audio data-key="80" src="http://carolinegabriel.com/demo/js-keyboard/sounds/055.wav"></audio>
+    <audio data-key="83" src="http://carolinegabriel.com/demo/js-keyboard/sounds/042.wav"></audio>
+    <audio data-key="84" src="http://carolinegabriel.com/demo/js-keyboard/sounds/046.wav"></audio>
+    <audio data-key="85" src="http://carolinegabriel.com/demo/js-keyboard/sounds/050.wav"></audio>
+    <audio data-key="87" src="http://carolinegabriel.com/demo/js-keyboard/sounds/041.wav"></audio>
+    <audio data-key="89" src="http://carolinegabriel.com/demo/js-keyboard/sounds/048.wav"></audio>
+    <audio data-key="186" src="http://carolinegabriel.com/demo/js-keyboard/sounds/056.wav"></audio>
+    <script>
+        function removeTransition(event) {
+          if (event.propertyName !== 'transform') return
+          event.target.classList.remove('playing')
+        }
+        function playSound(event) {
+          const audio = document.querySelector(`audio[data-key="${event.keyCode}"]`)
+          const key = document.querySelector(`div[data-key="${event.keyCode}"]`)
+          if (!audio) return
+          key.classList.add('playing')
+          audio.currentTime = 0
+          audio.play()
+        }
+        const keys = Array.from(document.querySelectorAll('.key'))
+        keys.forEach((key) => key.addEventListener('transitionend', removeTransition))
+        window.addEventListener('keydown', playSound)
+    </script>
+</body>
+</html>
